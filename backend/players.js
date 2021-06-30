@@ -27,15 +27,20 @@ export default class Players {
     return (treasure_x-tile_x)**2 + (treasure_y-tile_y)**2;
   }
 
-  drawMap() {
+  drawTraseures() {
     let treasures = Array.from([1,1,1],
       () => Math.floor(Math.random()*25%25)
       );
-    while(treasures[1] === treasures[2])
+    while(treasures[0] === treasures[2])
+      treasures[1] = Math.floor(Math.random()*25%25);
+    while(treasures[0] === treasures[2]
+      || treasures[1] === treasures[2])
       treasures[2] = Math.floor(Math.random()*25%25);
-    while(treasures[1] === treasures[3]
-      || treasures[2] === treasures[3])
-      treasures[3] = Math.floor(Math.random()*25%25);
+    return treasures;
+  }
+
+  drawMap() {
+    const treasures = this.drawTraseures();
 
     let map = Array(25).fill(1).map(
       (x, i, self) => 
