@@ -45,4 +45,6 @@ test('Returns possible 3 coordinates of treasures: range 0-24, every different',
   }
 });
 
-expect(()=>''.to)
+test('Map should contain 25 numbers'), () => {
+  expect(Map.drawMap()).toHaveLength(25);
+});
