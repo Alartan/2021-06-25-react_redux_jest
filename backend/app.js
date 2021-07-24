@@ -1,7 +1,7 @@
 import express from 'express';
 import { createServer } from 'http';
 import cors from 'cors';
-import Players from './players.js';
+import Players from './modules/players.js';
 
 const port = process.env.PORT || 4001;
 

@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals';
-import * as Map from '../map.js';
+import * as Map from '../modules/map.js';
 
 test('Calculates proximity square between coordinates using Pytagoras theorem', () => {
   expect(Map.proximitySquare(0, 1)).toBe(1);

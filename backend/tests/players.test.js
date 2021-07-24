@@ -1,4 +1,4 @@
-import Players from '../players';
+import Players from '../modules/players';
 
 test('New players', () => {
   let test_player = new Players;
