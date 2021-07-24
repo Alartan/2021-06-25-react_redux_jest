@@ -1,10 +1,10 @@
-import * as Map from './map.js';
+import drawMap from "./map/map";
 
 export default class Player {
   constructor(name) {
     this.name = name;
     this.score = 0;
-    this.map = Map.drawMap();
+    this.map = drawMap();
     this.travel = Array(25).fill(' ');
   }
 
