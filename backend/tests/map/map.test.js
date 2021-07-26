@@ -2,6 +2,7 @@ import { expect, test } from '@jest/globals';
 // neccesary for spyOn to work
 import * as drawTreasures from "../../modules/map/drawTreasures";
 import drawMap from '../../modules/map/map.js';
+import testUtils from '../test_utils';
 
 describe('Test drawMap if it is correct', () => {
   test('Drawn map has 25 tiles', () => {
@@ -38,13 +39,8 @@ describe('Test drawMap if it is correct', () => {
 
   test('Draw map from given treasures', () => {
     const spy = jest.spyOn(drawTreasures, 'default');
-    spy.mockReturnValue([10, 14, 19]);
-    expect(drawMap()).toStrictEqual(
-      [3, 2, 1, 2, 3,
-        5, 4, 2, 4, 5,
-        'T', 5, 3, 5, 'T',
-        5, 4, 3, 5, 'T',
-        3, 2, 2, 4, 5]);
+    spy.mockReturnValue(testUtils.testTreasures);
+    expect(drawMap()).toStrictEqual(testUtils.testMap);
     drawTreasures.default.mockRestore();
   });
 

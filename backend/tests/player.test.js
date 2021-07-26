@@ -28,3 +28,8 @@ describe('Test player module containing Player class', () => {
     expect(player.getScore()).toBe(8);
   })
 })
+
+test('Test showTile if it\'s mapping from map to travel', () => {
+  let player = new Player('test');
+  player.map
+})
