@@ -1,4 +1,5 @@
 import Player from '../modules/player';
+import drawMap from '../modules/map/map';
 
 describe('Test player module containing Player class', () => {
   test('constructor of Player', () => {
@@ -26,5 +27,19 @@ describe('Test player module containing Player class', () => {
     player.score = 7;
     player.incrementScore();
     expect(player.getScore()).toBe(8);
+  })
+
+  test('showTile function', () => {
+    let spy = jest.spyOn(drawMap, 'default');
+    spy.mockReturnValue();
+    let player = new Player('test');
+    tab.forEach((e, i) => {
+      expect(player.travel.reduce((s, e) => {
+        if (e === ' ') return s + 1;
+        else return s;
+      }, 0)).toBe(25-i);
+      player.showTile(i);
+      expect(player.travel[i]).toBe(e);
+    });
   })
 })
