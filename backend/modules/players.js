@@ -26,7 +26,7 @@ export default class Players {
 
   isWin(name) {
     return this.players[name].travel.reduce((sum, e) => {
-      if(e==='T') sum++;
+      if (e === 'T') sum++;
       return sum;
     }, 0) === 3 ? true : false;
   }

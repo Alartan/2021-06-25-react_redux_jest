@@ -1,22 +1,25 @@
 import drawMap from "./map/map";
 
 export default class Player {
+  #score;
+  #map;
+
   constructor(name) {
     this.name = name;
-    this.score = 0;
-    this.map = drawMap();
+    this.#score = 0;
+    this.#map = drawMap();
     this.travel = Array(25).fill(' ');
   }
 
   getScore() {
-    return this.score;
+    return this.#score;
   }
 
   incrementScore() {
-    this.score++;
+    this.#score++;
   }
 
   showTile(tile) {
-    this.travel[tile] = this.map[tile];
+    this.travel[tile] = this.#map[tile];
   }
 }

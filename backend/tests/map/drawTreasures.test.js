@@ -39,4 +39,12 @@ describe("Test drawing tiles for treasures", () => {
       expect(drawTreasures()).toBeInMapRange();
     }
   });
+
+  test('Treasures drawn aren\'t the same, but it may happen sometimes', () => {
+    expect(
+      [... drawTreasures(), ... drawTreasures(), ... drawTreasures()]
+      ).not.toStrictEqual(
+        [... drawTreasures(), ... drawTreasures(), ... drawTreasures()]
+        );
+  })
 });
