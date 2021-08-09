@@ -1,4 +1,4 @@
-import TopScores from "../modules/topScores";
+import TopScores from "../src/modules/topScores";
 import testUtils from "./testUtils";
 
 describe('Test topScores module to contain topScores', () => {

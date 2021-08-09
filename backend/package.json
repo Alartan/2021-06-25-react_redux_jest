@@ -2,7 +2,7 @@
   "name": "th-luxoft-back",
   "version": "1.0.0",
   "description": "Treasure Hunter game for Luxoft recruitment process",
-  "main": "app.js",
+  "main": "server.js",
   "type": "module",
   "private": true,
   "scripts": {
@@ -21,6 +21,7 @@
     "@babel/core": "^7.14.8",
     "@babel/preset-env": "^7.14.8",
     "babel-jest": "^27.0.6",
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "supertest": "^6.1.4"
   }
 }

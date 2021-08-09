@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals';
-import drawTreasures from "../../modules/map/drawTreasures";
+import drawTreasures from "../../src/modules/map/drawTreasures";
 
 expect.extend({
   toBeDifferent(received) {

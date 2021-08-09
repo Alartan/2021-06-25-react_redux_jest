@@ -1,11 +1,14 @@
-import Players from '../modules/players';
-import * as drawMap from '../modules/map/drawMap';
+import Players from '../src/modules/players';
+import * as drawMap from '../src/modules/map/drawMap';
 import testUtils from './testUtils';
 
 describe('Test Players module containing players data', () => {
   test('New players', () => {
+    const originalError = console.error;
+    console.error = jest.fn();
     const players = new Players;
     expect(() => { players.getPlayer(testUtils.test1); }).toThrow(`No player with name ${testUtils.test1}`);
+    console.error = originalError;
   });
 
   test('New players added', () => {
@@ -13,8 +16,8 @@ describe('Test Players module containing players data', () => {
     players.addPlayer(testUtils.test1);
     expect(players.getPlayer(testUtils.test1)).
       toStrictEqual({
-        "score": 0,
-        "travel": testUtils.emptyTravel
+        score: 0,
+        travel: testUtils.emptyTravel
       });
   });
 
@@ -25,19 +28,19 @@ describe('Test Players module containing players data', () => {
     players.incrementScore(testUtils.test1);
     expect(players.getPlayer(testUtils.test1)).
       toStrictEqual({
-        "score": 1,
-        "travel": testUtils.emptyTravel
+        score: 1,
+        travel: testUtils.emptyTravel
       });
     expect(players.getPlayer(testUtils.test2)).
       toStrictEqual({
-        "score": 0,
-        "travel": testUtils.emptyTravel
+        score: 0,
+        travel: testUtils.emptyTravel
       });
     [...Array(8)].forEach(() => players.incrementScore(testUtils.test1));
     expect(players.getPlayer(testUtils.test1)).
       toStrictEqual({
-        "score": 9,
-        "travel": testUtils.emptyTravel
+        score: 9,
+        travel: testUtils.emptyTravel
       });
   });
 
@@ -50,14 +53,14 @@ describe('Test Players module containing players data', () => {
     players.addPlayer(testUtils.test2);
     expect(players.getPlayer(testUtils.test1)).
       toStrictEqual({
-        "score": 0,
-        "travel": testUtils.emptyTravel
+        score: 0,
+        travel: testUtils.emptyTravel
       });
     [...Array(25).keys()].forEach((i) => players.showTile(testUtils.test1, i));
     expect(players.getPlayer(testUtils.test1)).
       toStrictEqual({
-        "score": 0,
-        "travel": testUtils.testMap
+        score: 0,
+        travel: testUtils.testMap
       });
     players.showTile(testUtils.test2, 9);
     expect(players.getPlayer(testUtils.test2).travel[9]).not.toBe(' ');
@@ -72,20 +75,20 @@ describe('Test Players module containing players data', () => {
     players.addPlayer(testUtils.test2);
     expect(players.getPlayer(testUtils.test1)).
       toStrictEqual({
-        "score": 0,
-        "travel": testUtils.emptyTravel
+        score: 0,
+        travel: testUtils.emptyTravel
       });
     [...Array(25).keys()].forEach((i) => players.showTile(testUtils.test1, i));
     expect(players.getPlayer(testUtils.test1)).
       toStrictEqual({
-        "score": 0,
-        "travel": testUtils.testMap
+        score: 0,
+        travel: testUtils.testMap
       });
     players.showTile(testUtils.test2, 9);
     expect(players.getPlayer(testUtils.test2).travel[9]).not.toBe(' ');
   });
 
-  test('Check win of a player', () => {
+  test('Check win and remove a player', () => {
     const mockMap = jest.spyOn(drawMap, 'default');
     mockMap.mockReturnValue(testUtils.testMap);
     const players = new Players;
@@ -99,7 +102,11 @@ describe('Test Players module containing players data', () => {
 
     testUtils.testWin.forEach((e) => { players.showTile(testUtils.test1, e); })
     expect(players.removeWon(testUtils.test1)).toBeTruthy();
+
+    const originalError = console.error;
+    console.error = jest.fn();
     expect(() => { players.getPlayer(testUtils.test1); }).
       toThrow(`No player with name ${testUtils.test1}`);
-  })
+    console.error = originalError;
+  });
 });

@@ -1,5 +1,5 @@
-import Player from '../modules/player';
-import * as drawMap from '../modules/map/drawMap';
+import Player from '../src/modules/player';
+import * as drawMap from '../src/modules/map/drawMap';
 import testUtils from './testUtils';
 
 describe('Test player module containing Player class', () => {

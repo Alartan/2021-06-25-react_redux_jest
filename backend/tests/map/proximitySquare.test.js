@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals';
-import proximitySquare from "../../modules/map/proximitySquare";
+import proximitySquare from "../../src/modules/map/proximitySquare";
 
 describe("Test calcuating proximity for map with treasures", () => {
   test('Calculates proximity square between coordinates using Pytagoras theorem', () => {
