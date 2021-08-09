@@ -10,9 +10,14 @@ function testTreasures() {
   return [10, 14, 19];
 }
 
+function emptyTravel() {
+  return Array(25).fill(' ');
+}
+
 const testUtils = {
   testMap: testMap(),
-  testTreasures: testTreasures()
+  testTreasures: testTreasures(),
+  emptyTravel: emptyTravel()
 };
 
 export default testUtils;

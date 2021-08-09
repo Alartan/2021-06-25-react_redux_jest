@@ -1,6 +1,6 @@
 import Player from '../modules/player';
 import * as drawMap from '../modules/map/map';
-import testUtils from '../test_utils';
+import testUtils from './testUtils';
 
 describe('Test player module containing Player class', () => {
   test('constructor of Player', () => {

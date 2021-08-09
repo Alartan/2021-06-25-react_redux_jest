@@ -2,7 +2,7 @@ import { expect, test } from '@jest/globals';
 // neccesary for spyOn to work
 import * as drawTreasures from "../../modules/map/drawTreasures";
 import drawMap from '../../modules/map/map.js';
-import testUtils from '../test_utils';
+import testUtils from '../testUtils';
 
 describe('Test drawMap if it is correct', () => {
   test('Drawn map has 25 tiles', () => {
