@@ -1,5 +1,6 @@
 import Player from '../modules/player';
 import * as drawMap from '../modules/map/map';
+import testUtils from '../test_utils';
 
 describe('Test player module containing Player class', () => {
   test('constructor of Player', () => {
@@ -25,19 +26,9 @@ describe('Test player module containing Player class', () => {
 
   test('showTile function', () => {
     let spy = jest.spyOn(drawMap, 'default');
-    spy.mockReturnValue(
-      [3, 2, 1, 2, 3,
-        5, 4, 2, 4, 5,
-        'T', 5, 3, 5, 'T',
-        5, 4, 3, 5, 'T',
-        3, 2, 2, 4, 5]);
+    spy.mockReturnValue(testUtils.testMap);
     let player = new Player('test');
-    
-    [3, 2, 1, 2, 3,
-      5, 4, 2, 4, 5,
-      'T', 5, 3, 5, 'T',
-      5, 4, 3, 5, 'T',
-      3, 2, 2, 4, 5].forEach((e, i) => {
+    testUtils.testMap.forEach((e, i) => {
       expect(player.travel.reduce((s, e) => {
         if (e === ' ') return s + 1;
         else return s;
@@ -46,4 +37,9 @@ describe('Test player module containing Player class', () => {
       expect(player.travel[i]).toBe(e);
     });
   })
+})
+
+test('Test showTile if it\'s mapping from map to travel', () => {
+  let player = new Player('test');
+  player.map
 })
