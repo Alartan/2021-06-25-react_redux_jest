@@ -1,6 +1,6 @@
 import Player from "./player.js";
 
-export default class players {
+export default class Players {
   #players;
 
   constructor() {
@@ -34,10 +34,14 @@ export default class players {
     this.#players[name].showTile(tile);
   }
 
-  isWin(name) {
-    return this.#players[name].travel.reduce((sum, e) => {
+  removeWon(name) {
+    if (this.#players[name].travel.reduce((sum, e) => {
       if (e === 'T') sum++;
       return sum;
-    }, 0) === 3 ? true : false;
+    }, 0) === 3){
+      delete this.#players[name];
+      return true;
+    } 
+    return false;
   }
 }

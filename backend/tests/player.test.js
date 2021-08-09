@@ -1,5 +1,5 @@
 import Player from '../modules/player';
-import * as drawMap from '../modules/map/map';
+import * as drawMap from '../modules/map/drawMap';
 import testUtils from './testUtils';
 
 describe('Test player module containing Player class', () => {
@@ -16,7 +16,7 @@ describe('Test player module containing Player class', () => {
   });
 
   test('getScore and incrementScore functions', () => {
-    let player = new Player('test');
+    const player = new Player('test');
     expect(player.getScore()).toBe(0);
     player.incrementScore();
     expect(player.getScore()).toBe(1);
@@ -25,9 +25,9 @@ describe('Test player module containing Player class', () => {
   })
 
   test('showTile function', () => {
-    let spy = jest.spyOn(drawMap, 'default');
+    const spy = jest.spyOn(drawMap, 'default');
     spy.mockReturnValue(testUtils.testMap);
-    let player = new Player('test');
+    const player = new Player('test');
     testUtils.testMap.forEach((e, i) => {
       expect(player.travel.reduce((s, e) => {
         if (e === ' ') return s + 1;
@@ -39,8 +39,3 @@ describe('Test player module containing Player class', () => {
     spy.mockRestore();
   });
 });
-
-test('Test showTile if it\'s mapping from map to travel', () => {
-  let player = new Player('test');
-  player.map
-})

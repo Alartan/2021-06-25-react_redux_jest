@@ -1,4 +1,4 @@
-import drawMap from "./map/map";
+import drawMap from './map/drawMap.js';
 
 export default class Player {
   #score;

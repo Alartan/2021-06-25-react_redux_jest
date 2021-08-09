@@ -1,5 +1,5 @@
-import drawTreasures from './drawTreasures';
-import proximitySquare from './proximitySquare';
+import drawTreasures from './drawTreasures.js';
+import proximitySquare from './proximitySquare.js';
 
 export default function drawMap() {
   const treasures = drawTreasures();
