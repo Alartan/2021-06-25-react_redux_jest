@@ -36,8 +36,9 @@ describe('Test player module containing Player class', () => {
       player.showTile(i);
       expect(player.travel[i]).toBe(e);
     });
-  })
-})
+    spy.mockRestore();
+  });
+});
 
 test('Test showTile if it\'s mapping from map to travel', () => {
   let player = new Player('test');

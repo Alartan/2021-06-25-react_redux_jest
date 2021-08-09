@@ -10,14 +10,25 @@ function testTreasures() {
   return [10, 14, 19];
 }
 
+function testWin() {
+  return [10, 14, 19];
+}
+
 function emptyTravel() {
   return Array(25).fill(' ');
+}
+
+function testName(index) {
+  return `test${index}`;
 }
 
 const testUtils = {
   testMap: testMap(),
   testTreasures: testTreasures(),
-  emptyTravel: emptyTravel()
+  testWin: testWin(),
+  emptyTravel: emptyTravel(),
+  test1: testName(1),
+  test2: testName(2)
 };
 
 export default testUtils;
