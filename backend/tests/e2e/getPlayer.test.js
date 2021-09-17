@@ -1,23 +1,52 @@
 import request from 'supertest';
 import app from '../../src/app';
 import testUtils from '../testUtils';
+import async from 'async';
 
-describe.skip('Test adding and retrieving a player', () => {
-  test('Tests if player is added', async () => {
-    let res = await request(app).post('/name').
-      send({ "name": testUtils.test1 });
-    expect(res.statusCode).toBe(200);
-    expect(res.body).
-      toStrictEqual({
-        score: 0,
-        travel: testUtils.emptyTravel
-      });
-    res = await request(app).get(`/name${testUtils.test1}`);
-    expect(res.statusCode).toBe(200);
-    expect(res.body).
-      toStrictEqual({
-        score: 0,
-        travel: testUtils.emptyTravel
-      });
+describe('Test adding and retrieving a player', () => {
+  test('Tests if added player is getable and if not', () => {
+    async.series([
+      async () => {
+        let res = await request(app).post('/name').
+          send({ "name": testUtils.test1 });
+        expect(res.statusCode).toBe(200);
+        expect(res.body).
+          toStrictEqual({
+            score: 0,
+            travel: testUtils.emptyTravel
+          });
+      },
+      async () => {
+        let res = await request(app).get(`/name${testUtils.test2}`);
+        expect(res.statusCode).toBe(404);
+      },
+      async () => {
+        let res = await request(app).get(`/name${testUtils.test1}`);
+        expect(res.statusCode).toBe(200);
+        expect(res.body).
+          toStrictEqual({
+            score: 0,
+            travel: testUtils.emptyTravel
+          });
+      }
+    ])
+  });
+  test('Tests if not added player gives 404', () => {
+    async.series([
+      async () => {
+        let res = await request(app).post('/name').
+          send({ "name": testUtils.test1 });
+        expect(res.statusCode).toBe(200);
+        expect(res.body).
+          toStrictEqual({
+            score: 0,
+            travel: testUtils.emptyTravel
+          });
+      },
+      async () => {
+        let res = await request(app).get(`/name${testUtils.test2}`);
+        expect(res.statusCode).toBe(404);
+      }
+    ])
   });
 });
