@@ -4,8 +4,8 @@ import testUtils from '../testUtils';
 import async from 'async';
 
 describe('Test adding and retrieving a player', () => {
-  test('Tests if added player is getable and if not', () => {
-    async.series([
+  test('Tests if added player is getable', async () => {
+    await async.series([
       async () => {
         let res = await request(app).post('/name').
           send({ "name": testUtils.test1 });
@@ -17,11 +17,7 @@ describe('Test adding and retrieving a player', () => {
           });
       },
       async () => {
-        let res = await request(app).get(`/name${testUtils.test2}`);
-        expect(res.statusCode).toBe(404);
-      },
-      async () => {
-        let res = await request(app).get(`/name${testUtils.test1}`);
+        let res = await request(app).get(`/name/${testUtils.test1}`);
         expect(res.statusCode).toBe(200);
         expect(res.body).
           toStrictEqual({
@@ -31,12 +27,12 @@ describe('Test adding and retrieving a player', () => {
       }
     ])
   });
-  test('Tests if not added player gives 404', () => {
-    async.series([
+  test('Tests if not added player gives 404', async () => {
+    await async.series([
       async () => {
         let res = await request(app).post('/name').
           send({ "name": testUtils.test1 });
-        expect(res.statusCode).toBe(200);
+        expect(res.status).toBe(200);
         expect(res.body).
           toStrictEqual({
             score: 0,
@@ -44,8 +40,8 @@ describe('Test adding and retrieving a player', () => {
           });
       },
       async () => {
-        let res = await request(app).get(`/name${testUtils.test2}`);
-        expect(res.statusCode).toBe(404);
+        let res = await request(app).get(`/name/${testUtils.test2}`);
+        expect(res.status).toBe(404);
       }
     ])
   });

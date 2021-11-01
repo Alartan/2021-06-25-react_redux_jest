@@ -7,7 +7,7 @@ describe('Test Players module containing players data', () => {
     const originalError = console.error;
     console.error = jest.fn();
     const players = new Players;
-    expect(() => { players.getPlayer(testUtils.test1); }).toThrow(`No player with name ${testUtils.test1}`);
+    expect(players.getPlayer(testUtils.test1)).toBeFalsy();
     console.error = originalError;
   });
 
@@ -96,17 +96,16 @@ describe('Test Players module containing players data', () => {
     mockMap.mockRestore();
 
     [1, 2, 3].forEach((e) => { players.showTile(testUtils.test1, e); })
-    expect(players.removeWon(testUtils.test1)).not.toBeTruthy();
-    expect(() => { players.getPlayer(testUtils.test1); }).
-      not.toThrow(`No player with name ${testUtils.test1}`);
+    expect(players.removeWon(testUtils.test1)).toBeFalsy();
+    expect(players.getPlayer(testUtils.test1)).
+      not.toBeFalsy();
 
     testUtils.testWin.forEach((e) => { players.showTile(testUtils.test1, e); })
     expect(players.removeWon(testUtils.test1)).toBeTruthy();
 
     const originalError = console.error;
     console.error = jest.fn();
-    expect(() => { players.getPlayer(testUtils.test1); }).
-      toThrow(`No player with name ${testUtils.test1}`);
+    expect(players.getPlayer(testUtils.test1)).toBeFalsy();
     console.error = originalError;
   });
 });

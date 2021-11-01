@@ -23,8 +23,9 @@ app.post("/name", (req, res) => {
 });
 
 app.get("/name/:name", (req, res) => {
-  const name = req.params.name;
-  res.send(players.getPlayer(name)).status(200);
+  const response = players.getPlayer(req.params.name);
+  if (response) res.status(200).send(response);
+  else res.status(404).send({});
 });
 
 app.post("/move/:name", (req, res) => {

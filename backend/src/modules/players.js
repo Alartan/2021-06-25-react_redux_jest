@@ -13,17 +13,12 @@ export default class Players {
 
   getPlayer(name) {
     const player = this.#players[name];
-    try {
-      if (player)
+    if (player !== undefined)
       return {
         score: player.getScore(),
-        travel: player.travel // change it for travel
+        travel: player.travel
       };
-      throw new Error(`No player with name ${name}`);
-    } catch (e) {
-      console.error('players', e.message);
-      throw e;
-    }
+    return false;
   }
 
   incrementScore(name) {
