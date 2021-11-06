@@ -7,7 +7,7 @@ describe('Test Players module containing players data', () => {
     const originalError = console.error;
     console.error = jest.fn();
     const players = new Players;
-    expect(players.getPlayer(testUtils.test1)).toBeFalsy();
+    expect(() => {players.getPlayer(testUtils.test1)}).toThrow(new Error(`No player named ${testUtils.test1}`));
     console.error = originalError;
   });
 
@@ -105,7 +105,7 @@ describe('Test Players module containing players data', () => {
 
     const originalError = console.error;
     console.error = jest.fn();
-    expect(players.getPlayer(testUtils.test1)).toBeFalsy();
+    expect(() => {players.getPlayer(testUtils.test1)}).toThrow(new Error(`No player named ${testUtils.test1}`));
     console.error = originalError;
   });
 });

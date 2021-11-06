@@ -23,33 +23,41 @@ app.post("/name", (req, res) => {
 });
 
 app.get("/name/:name", (req, res) => {
-  const response = players.getPlayer(req.params.name);
-  if (response) res.status(200).send(response);
-  else res.status(404).send({});
+  try {
+    const response = players.getPlayer(req.params.name);
+    if (response) res.status(200).send(response);
+  } catch (ex) {
+    res.status(404).send({});
+  }
 });
 
 app.post("/move/:name", (req, res) => {
   const name = req.params.name;
   const moves = req.body.moves;
-
-  moves.forEach(element => {
-    players.showTile(name, element);
-  });
-
-  players.incrementScore(name);
-
-  const player = players.getPlayer(name)
-
-  if (players.removeWon(name)) {
-    topScores.addScore(name, player.score);
-    res.send({
-      ...player,
-      win: true,
-      topScores: topScores.getScores()
+  try {
+    moves.forEach(element => {
+      players.showTile(name, element);
     });
-  }
+  
+    players.incrementScore(name);
+  
+    const player = players.getPlayer(name);
+  
+    if(player) {
+      if (players.removeWon(name)) {
+        topScores.addScore(name, player.score);
+        res.send({
+          ...player,
+          win: true,
+          topScores: topScores.getScores()
+        });
+      }
+      res.send(player);
+    }
 
-  else res.send(player);
+  } catch (ex) {
+    res.status(404).send({});
+  }
 });
 
 export default app;

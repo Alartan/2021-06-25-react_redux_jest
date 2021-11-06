@@ -18,15 +18,23 @@ export default class Players {
         score: player.getScore(),
         travel: player.travel
       };
-    return false;
+    throw new Error(`No player named ${name}`);
   }
 
   incrementScore(name) {
-    this.#players[name].incrementScore();
+    const player = this.#players[name];
+    if (player !== undefined)
+      this.#players[name].incrementScore();
+    else
+      throw new Error(`No player named ${name}`);
   }
 
   showTile(name, tile) {
-    this.#players[name].showTile(tile);
+    const player = this.#players[name];
+    if (player !== undefined)
+      this.#players[name].showTile(tile);
+    else
+      throw new Error(`No player named ${name}`);
   }
 
   removeWon(name) {
