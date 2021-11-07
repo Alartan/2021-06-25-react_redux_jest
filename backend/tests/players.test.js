@@ -108,4 +108,20 @@ describe('Test Players module containing players data', () => {
     expect(() => {players.getPlayer(testUtils.test1)}).toThrow(new Error(`No player named ${testUtils.test1}`));
     console.error = originalError;
   });
+
+  test('Increment score fails on player that doesn\'t exists', () => {
+    const players = new Players;
+    const originalError = console.error;
+    console.error = jest.fn();
+    expect(() => {players.incrementScore(testUtils.test1)}).toThrow(new Error(`No player named ${testUtils.test1}`));
+    console.error = originalError;
+  });
+
+  test('Show tile fails on player that doesn\'t exists', () => {
+    const players = new Players;
+    const originalError = console.error;
+    console.error = jest.fn();
+    expect(() => {players.showTile(testUtils.test1), 10}).toThrow(new Error(`No player named ${testUtils.test1}`));
+    console.error = originalError;
+  });
 });

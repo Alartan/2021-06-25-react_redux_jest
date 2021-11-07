@@ -24,8 +24,7 @@ app.post("/name", (req, res) => {
 
 app.get("/name/:name", (req, res) => {
   try {
-    const response = players.getPlayer(req.params.name);
-    if (response) res.status(200).send(response);
+    res.status(200).send(players.getPlayer(req.params.name));
   } catch (ex) {
     res.status(404).send({});
   }
@@ -34,29 +33,27 @@ app.get("/name/:name", (req, res) => {
 app.post("/move/:name", (req, res) => {
   const name = req.params.name;
   const moves = req.body.moves;
+  if (moves.length > 3 || moves.length < 1) {
+    res.status(404).send({Error:'Wrong number of moves'});
+  }
   try {
     moves.forEach(element => {
       players.showTile(name, element);
     });
   
     players.incrementScore(name);
-  
     const player = players.getPlayer(name);
-  
-    if(player) {
-      if (players.removeWon(name)) {
-        topScores.addScore(name, player.score);
-        res.send({
-          ...player,
-          win: true,
-          topScores: topScores.getScores()
-        });
-      }
-      res.send(player);
+    if (players.removeWon(name)) {
+      topScores.addScore(name, player.score);
+      res.send({
+        ...player,
+        win: true,
+        topScores: topScores.getScores()
+      });
     }
-
+    res.send(player);
   } catch (ex) {
-    res.status(404).send({});
+    res.status(404).send({Error:ex.message});
   }
 });
 
